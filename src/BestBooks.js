@@ -39,10 +39,10 @@ class BestBooks extends React.Component {
              <><Carousel>
               {this.state.books.map(book => 
                 
-            <Carousel.Item>
+            <Carousel.Item key={book._id}>
               <img
                 className="d-block w-100"
-                src="holder.js/800x400?text=First slide&bg=373940"
+                src={book.src}
                 alt={book.title} />
               <Carousel.Caption>
                 <h3>{book.title}</h3>
