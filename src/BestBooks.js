@@ -17,7 +17,7 @@ class BestBooks extends React.Component {
   componentDidMount = async () => {
     const config = {
       method: 'get', // get is the default
-      baseURL: 'http://localhost:3001',
+      baseURL: process.env.REACT_APP_SERVER,
       url: '/books' // endpoint
     }
 
