@@ -42,7 +42,30 @@ class BestBooks extends React.Component {
       const response = await axios(config);
       this.setState({ books: [...this.state.books, response.data] });
     } catch(error) {
-      console.error('Error is in the App.js in the createBook Function: ', error);
+      console.error('Error is in the BestBooks.js in the createBook Function: ', error);
+      // axios sends more info about the error in a response object on the error
+      this.setState({ errorMessage: `Status Code ${error.response.status}: ${error.response.data}`});
+    }
+  }
+
+  handleDeleteBook = async (bookToBeDeleted) => {
+    try {
+      const proceed = window.confirm(`Do you wish to delete ${bookToBeDeleted.title}?`);
+
+      if (proceed) {
+        const config = {
+          method: 'delete',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/books/${bookToBeDeleted._id}`
+        }
+
+        const response = await axios(config);
+        console.log(response.data);
+        const newBooksArr = this.state.books.filter(book => book._id !== bookToBeDeleted._id);
+        this.setState({ books: newBooksArr });
+      }
+    } catch(error) {
+      console.error('Error is in the BestBooks.js in the deleteBook Function: ', error);
       // axios sends more info about the error in a response object on the error
       this.setState({ errorMessage: `Status Code ${error.response.status}: ${error.response.data}`});
     }
@@ -80,6 +103,7 @@ class BestBooks extends React.Component {
                 <h3>{book.title}</h3>
                 <p>{book.description}</p>
                 <p>{book.status}</p>
+                <Button onClick={() => this.handleDeleteBook(book)}>Delete this book!</Button>
               </Carousel.Caption>
             </Carousel.Item>
                 )}
