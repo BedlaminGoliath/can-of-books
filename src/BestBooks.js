@@ -1,16 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
-
-
+import Button from 'react-bootstrap/Button';
+import BookFormModal from './BookFormModal';
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
+      showBookModal: false,
+      errorMessage: ''
     }
   }
+
+  handleClose = () => this.setState({ showBookModal: false });
+
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
@@ -26,6 +31,24 @@ class BestBooks extends React.Component {
     this.setState({ books: response.data });
   }
 
+  handleCreateBook = async (bookToBeCreated) => {
+    try {
+      const config = {
+        method: 'post',
+        baseURL: process.env.REACT_APP_SERVER,
+        url: '/books',
+        data: bookToBeCreated // 'data' is the data to be sent on the request.body
+      }
+      const response = await axios(config);
+      this.setState({ books: [...this.state.books, response.data] });
+    } catch(error) {
+      console.error('Error is in the App.js in the createBook Function: ', error);
+      // axios sends more info about the error in a response object on the error
+      this.setState({ errorMessage: `Status Code ${error.response.status}: ${error.response.data}`});
+    }
+  }
+
+  showModal = () => this.setState({ showBookModal: true });
 
   render() {
 
@@ -35,7 +58,16 @@ class BestBooks extends React.Component {
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
-        {this.state.books.length ? (
+        <Button onClick={this.showModal}>Add a New Book!</Button>
+
+        {this.state.showBookModal && 
+          <BookFormModal
+            handleCreateBook={this.handleCreateBook}
+            showBookModal={this.state.showBookModal}
+            closeModal={this.handleClose}
+          /> }
+
+        {!this.state.errorMessage ? (
              <><Carousel>
               {this.state.books.map(book => 
                 
@@ -52,8 +84,9 @@ class BestBooks extends React.Component {
             </Carousel.Item>
                 )}
           </Carousel></>
+          
         ) : (
-          <h3>No Books Found :(</h3>
+          <h3>{this.state.errorMessage}</h3>
         )}
       </>
     )

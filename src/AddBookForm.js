@@ -16,7 +16,7 @@ class AddBookForm extends React.Component{
     console.log(`Here is our NEW Book: `, newBook);
     // we need to pass this newCat back up to App.js to be sent to the server
     // then the server is going to use Mongoose to create a new cat in the database
-    this.props.handleCreateCat(newBook);
+    this.props.handleCreateBook(newBook);
   }
 
   render() {
