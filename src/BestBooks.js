@@ -91,7 +91,7 @@ class BestBooks extends React.Component {
           /> }
 
         {!this.state.errorMessage ? (
-             <><Carousel>
+             <><Carousel className='carousel'>
               {this.state.books.map(book => 
                 
             <Carousel.Item key={book._id}>

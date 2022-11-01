@@ -14,7 +14,7 @@ import {
 class App extends React.Component {
   render() {
     return (
-      <>
+      <div className='app'>
         <Router>
           <Header />
           <Routes>
@@ -32,7 +32,7 @@ class App extends React.Component {
           </Routes>
           <Footer />
         </Router>
-      </>
+      </div>
     )
   }
 }
