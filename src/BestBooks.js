@@ -3,6 +3,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import BookFormModal from './BookFormModal';
+import UpdateABookForm from './UpdateABookForm';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -10,12 +11,13 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       showBookModal: false,
-      errorMessage: ''
+      errorMessage: '',
+      selectedBook: {},
+      show: false
     }
   }
 
   handleClose = () => this.setState({ showBookModal: false });
-
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
@@ -71,6 +73,35 @@ class BestBooks extends React.Component {
     }
   }
 
+  handleUpdateBook = async (bookToBeUpdated) => {
+    try {
+        const config = {
+          method: 'put',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/books/${bookToBeUpdated._id}`,
+          data: bookToBeUpdated
+        }
+
+        const response = await axios(config);
+        console.log(response.data);
+        const updatedBooks = this.state.books.map(preExistingBook => {
+          if (preExistingBook._id === bookToBeUpdated._id) {
+            return bookToBeUpdated;
+          } else {
+            return preExistingBook;
+          }
+        })
+        this.setState({ books: updatedBooks });
+    } catch(error) {
+      console.error('Error is in the App.js in the updateBook Function: ', error);
+      // axios sends more info about the error in a response object on the error
+      this.setState({ errorMessage: `Status Code ${error.response.status}: ${error.response.data}`});
+    }
+  }
+
+  handleSelectBook = (bookToBeSelected) => this.setState({ selectedBook: bookToBeSelected, show: true });
+  handleOnHide = () => this.setState({ selectedBook: {}, show: false })
+
   showModal = () => this.setState({ showBookModal: true });
 
   render() {
@@ -89,6 +120,15 @@ class BestBooks extends React.Component {
             showBookModal={this.state.showBookModal}
             closeModal={this.handleClose}
           /> }
+        
+        {this.state.selectedBook.title && 
+          <UpdateABookForm
+            handleUpdateBook={this.handleUpdateBook}
+            selectedBook={this.state.selectedBook}
+            show={this.state.show}
+            handleOnHide={this.handleOnHide}
+          />}
+
 
         {!this.state.errorMessage ? (
              <><Carousel className='carousel'>
@@ -102,7 +142,8 @@ class BestBooks extends React.Component {
               <Carousel.Caption>
                 <h3>{book.title}</h3>
                 <p>{book.description}</p>
-                <p>{book.status}</p>
+                <p>{book.status ? <p>Read</p> : <p>Unread</p>}</p>
+                <Button onClick={() => this.handleSelectBook(book)}>Update this book!</Button>
                 <Button onClick={() => this.handleDeleteBook(book)}>Delete this book!</Button>
               </Carousel.Caption>
             </Carousel.Item>
