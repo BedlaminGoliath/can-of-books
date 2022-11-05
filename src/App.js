@@ -2,9 +2,12 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import BestBooks from './BestBooks';
-import Profile from './About'
+import About from './About'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { withAuth0 } from "@auth0/auth0-react";
+import Login from './Login';
+import Profile from './Profile';
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,15 +21,29 @@ class App extends React.Component {
         <Router>
           <Header />
           <Routes>
-            <Route 
+            <Route
               exact path="/"
-              element={<BestBooks />}
+              element={this.props.auth0.isAuthenticated ?
+                <>
+
+                  <BestBooks />
+
+                </>
+                :
+                <Login />
+              }
             >
             </Route>
+            <Route
+              exact path="/profile"
+              element={
+                <Profile />
+              }
+            ></Route>
             {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
-            <Route 
+            <Route
               exact path="/about"
-              element={<Profile />}
+              element={<About />}
             >
             </Route>
           </Routes>
@@ -37,4 +54,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withAuth0(App);
