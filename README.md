@@ -4,33 +4,39 @@
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-<!-- -->
+
+This assignment is a digital bookshelf where you are able to store your favorite books. This would also allow your book to be stored in a database, which would make them able to be added to or deleted.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+
+There must be an initial server built with valid end points. Alongside a front end where You do have various bootstrap components accessible (like forms and modals) These forms (modal) would take in the value of the input and send them to our active server/ database and store these items, where they are accesible to create and delete.
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
+This app was heavily built around JS, React, Mongoose, and Express
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
 10-22-2022 3:59pm - Deployed on netlify -->
+10-25 -2022 we created access to mongoose and mongo db, we also created our schema and built several front end components that would allow access to the back end components.
+10-26-22 We added react modal which would act as a landing pad for our form, which makes the adding to our DB possible.
 
 ## Estimates
 <!-- See below -->
-Name of feature: _____________________________
+Name of feature: ___________Create__________________
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: __1hr___
 
-Start time: _____
+Start time: _8:30___
 
-Finish time: _____
+Finish time: __9:30___
 
-Actual time needed to complete: _____
+Actual time needed to complete: __1hr___
 
-## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+## Credit and Collaborations 
+
+Ezgi is an amazing software developer and I love to work with such a concise person who is so hardworking, it is inspiring.
+
 ### Logistical
 
 - What hours will you be available to communicate?  
