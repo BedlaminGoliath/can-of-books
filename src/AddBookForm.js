@@ -45,7 +45,6 @@ class AddBookForm extends React.Component{
             <Form.Check
               type='checkbox'
               label="Read"
-              checked
               />
           </Form.Group>
 
@@ -56,7 +55,6 @@ class AddBookForm extends React.Component{
               placeholder="Book's image url goes here"
             />
           </Form.Group>
-
 
           <Button type="submit">Create Book!</Button>
 
