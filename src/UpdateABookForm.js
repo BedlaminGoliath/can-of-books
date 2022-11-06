@@ -61,6 +61,7 @@ class UpdateABookForm extends React.Component {
               </Form.Group>
               
               <Form.Group>
+              <Form.Label>Book's status</Form.Label>
                 <Form.Check
                   type="checkbox"
                   label="Read"

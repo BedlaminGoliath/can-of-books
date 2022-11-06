@@ -10,7 +10,7 @@ class AddBookForm extends React.Component{
     const newBook = {
       title: event.target.formTitle.value,
       description: event.target.formDescription.value,
-      status: event.target.formStatus.value,
+      status: event.target.formStatus.checked,
       src: event.target.formUrl.value
     }
     console.log(`Here is our NEW Book: `, newBook);
@@ -42,10 +42,11 @@ class AddBookForm extends React.Component{
 
           <Form.Group controlId='formStatus'>
             <Form.Label>Book's status</Form.Label>
-            <Form.Control
-              type='text'
-              placeholder="Book's status goes here"
-            />
+            <Form.Check
+              type='checkbox'
+              label="Read"
+              checked= {true}
+              />
           </Form.Group>
 
           <Form.Group controlId='formUrl'>
