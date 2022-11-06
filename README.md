@@ -71,3 +71,13 @@ Ezgi is an amazing software developer and I love to work with such a concise per
     Same as above. 
 - How will you approach each other and the challenge of building an application knowing that it is impossible for two people to be at the exact same place in understanding and skill level?  
     Switch roles if necessaty during paired-programming, help each other understand concepts we are trying to implement.
+
+Name of feature: __________Authorization______________________
+
+Estimate of time needed to complete: __2hours___
+
+Start time: __12___
+
+Finish time: _6:30____
+
+Actual time needed to complete: _4hours____
