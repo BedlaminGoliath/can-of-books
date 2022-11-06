@@ -45,7 +45,7 @@ class AddBookForm extends React.Component{
             <Form.Check
               type='checkbox'
               label="Read"
-              checked= {this.newBook.status}
+              checked
               />
           </Form.Group>
 
