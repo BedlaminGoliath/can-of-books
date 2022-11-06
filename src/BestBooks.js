@@ -54,6 +54,7 @@ class BestBooks extends React.Component {
 
       try {
         const config = {
+          headers: { "Authorization": `Bearer ${jwt}` },
           method: 'post',
           baseURL: process.env.REACT_APP_SERVER,
           url: '/books',
@@ -82,6 +83,7 @@ class BestBooks extends React.Component {
 
         if (proceed) {
           const config = {
+            headers: { "Authorization": `Bearer ${jwt}` },
             method: 'delete',
             baseURL: process.env.REACT_APP_SERVER,
             url: `/books/${bookToBeDeleted._id}`
@@ -110,6 +112,7 @@ class BestBooks extends React.Component {
 
       try {
         const config = {
+          headers: { "Authorization": `Bearer ${jwt}` },
           method: 'put',
           baseURL: process.env.REACT_APP_SERVER,
           url: `/books/${bookToBeUpdated._id}`,
